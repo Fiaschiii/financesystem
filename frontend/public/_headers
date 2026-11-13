@@ -1,0 +1,21 @@
+# Cabeçalhos de segurança do frontend publicado na Cloudflare Pages
+# (a Netlify também lê este arquivo). Vai para o dist/ junto com o build.
+#
+# A CSP principal está numa <meta> no index.html (ver csp.js). Mas
+# "frame-ancestors" não funciona em <meta>: só em cabeçalho. É ela (junto com
+# o X-Frame-Options, para navegadores antigos) que impede outro site de abrir
+# o sistema dentro de um iframe invisível para enganar cliques (clickjacking).
+# Duas políticas CSP valem juntas: esta só acrescenta a regra do iframe.
+
+/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Arquivos do build têm um hash no nome: quando mudam, mudam de nome. Podem
+# ficar em cache por 1 ano sem risco de alguém ver uma versão velha.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

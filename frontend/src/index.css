@@ -1,0 +1,143 @@
+/* ------------------------------------------------------------
+   Cores (tokens). Todo o CSS usa estas variáveis, nunca cores soltas:
+   é isso que permite o tema escuro trocar tudo de uma vez.
+   - Automático: segue o sistema operacional (prefers-color-scheme).
+   - Claro/Escuro: escolhido em Configurações; vira data-theme no <html>.
+   ------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+
+  --color-bg: #f1f3ee;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f6f8f4;
+  --color-ink: #1a2b21;
+  --color-ink-muted: #5c6b60;
+  --color-accent: #2e6b4b;
+  --color-accent-dark: #234f38;
+  --color-accent-soft: #e4f0e9;
+  --color-on-accent: #ffffff;
+  --color-line: #dbe1d8;
+  --color-warning: #8a5f12;
+  --color-warning-soft: #fbf3e6;
+  --color-danger: #a6412b;
+  --color-danger-soft: #fbeae7;
+  --color-on-danger: #ffffff;
+  --color-skeleton: #e6eae3;
+  --shadow-raised: 0 1px 2px rgba(26, 43, 33, 0.06), 0 4px 14px rgba(26, 43, 33, 0.06);
+  --shadow-float: 0 6px 24px rgba(26, 43, 33, 0.16);
+  --shadow-accent: 0 4px 12px rgba(46, 107, 75, 0.3);
+
+  --chart-salary: #2a7a52;
+  --chart-spent: #c27a3a;
+  --chart-grid: #e8ece6;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-bg: #0f1612;
+    --color-surface: #17201b;
+    --color-surface-sunken: #1d2822;
+    --color-ink: #e4ebe6;
+    --color-ink-muted: #9db0a3;
+    --color-accent: #5cb888;
+    --color-accent-dark: #86d3aa;
+    --color-accent-soft: #1c3427;
+    --color-on-accent: #0b1810;
+    --color-line: #2b3a31;
+    --color-warning: #e3b35b;
+    --color-warning-soft: #31270f;
+    --color-danger: #f08c74;
+    --color-danger-soft: #3a1e18;
+    --color-on-danger: #2a0f0a;
+    --color-skeleton: #24302a;
+    --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-float: 0 8px 28px rgba(0, 0, 0, 0.5);
+    --shadow-accent: 0 4px 14px rgba(92, 184, 136, 0.28);
+
+    --chart-salary: #4fae7f;
+    --chart-spent: #e09a5a;
+    --chart-grid: #25312a;
+  }
+}
+
+/* Mesmo bloco do de cima, para quem escolheu "Escuro" manualmente. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0f1612;
+  --color-surface: #17201b;
+  --color-surface-sunken: #1d2822;
+  --color-ink: #e4ebe6;
+  --color-ink-muted: #9db0a3;
+  --color-accent: #5cb888;
+  --color-accent-dark: #86d3aa;
+  --color-accent-soft: #1c3427;
+  --color-on-accent: #0b1810;
+  --color-line: #2b3a31;
+  --color-warning: #e3b35b;
+  --color-warning-soft: #31270f;
+  --color-danger: #f08c74;
+  --color-danger-soft: #3a1e18;
+  --color-on-danger: #2a0f0a;
+  --color-skeleton: #24302a;
+  --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-float: 0 8px 28px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 4px 14px rgba(92, 184, 136, 0.28);
+
+  --chart-salary: #4fae7f;
+  --chart-spent: #e09a5a;
+  --chart-grid: #25312a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+/* Contorno de foco para quem navega pelo teclado (Tab). Não aparece no clique. */
+:where(a, button, select, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Valores em dinheiro alinhados (todos os dígitos com a mesma largura). */
+.num,
+.dashboard-card__value {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

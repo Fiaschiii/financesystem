@@ -1,0 +1,30 @@
+{
+  "name": "controle-financeiro-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend do sistema de controle financeiro pessoal",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "supertest": "^7.3.2",
+    "vitest": "^3.2.7"
+  }
+}

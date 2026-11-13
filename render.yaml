@@ -1,0 +1,37 @@
+# Publicação do BACKEND no Render (plano gratuito).
+# No Render: New > Blueprint > escolha este repositório. Ele lê este arquivo,
+# cria o serviço e pede os valores marcados com "sync: false" (os que mudam
+# de pessoa para pessoa). Passo a passo completo no README, em "Publicação".
+#
+# O frontend NÃO vai aqui: ele é publicado na Cloudflare Pages.
+
+services:
+  - type: web
+    name: controle-financeiro-api
+    runtime: node
+    plan: free
+    # Região mais próxima do Brasil entre as do Render. Se o seu projeto
+    # Supabase estiver em outra região, escolha a mais perto dele.
+    region: virginia
+    rootDir: backend
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    # Rota que fica fora dos limites de requisições (ver backend/src/app.js).
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # O Render fica na frente do backend como proxy: sem isso, todos os
+      # visitantes teriam o mesmo IP e dividiriam o mesmo limite.
+      - key: TRUST_PROXY
+        value: "1"
+      # Endereço do frontend publicado (CORS), sem barra no fim.
+      # Ex.: https://controle-financeiro.pages.dev
+      - key: FRONTEND_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      # Só a chave PUBLISHABLE (sb_publishable_...). Nunca a secret.
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false
